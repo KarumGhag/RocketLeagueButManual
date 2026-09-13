@@ -1,0 +1,14 @@
+D:\0zed\RocketLeague\bin\Debug\net10.0\RocketLeague.exe
+D:\0zed\RocketLeague\bin\Debug\net10.0\RocketLeague.deps.json
+D:\0zed\RocketLeague\bin\Debug\net10.0\RocketLeague.runtimeconfig.json
+D:\0zed\RocketLeague\bin\Debug\net10.0\RocketLeague.dll
+D:\0zed\RocketLeague\bin\Debug\net10.0\RocketLeague.pdb
+D:\0zed\RocketLeague\obj\Debug\net10.0\RocketLeague.GeneratedMSBuildEditorConfig.editorconfig
+D:\0zed\RocketLeague\obj\Debug\net10.0\RocketLeague.AssemblyInfoInputs.cache
+D:\0zed\RocketLeague\obj\Debug\net10.0\RocketLeague.AssemblyInfo.cs
+D:\0zed\RocketLeague\obj\Debug\net10.0\RocketLeague.csproj.CoreCompileInputs.cache
+D:\0zed\RocketLeague\obj\Debug\net10.0\RocketLeague.dll
+D:\0zed\RocketLeague\obj\Debug\net10.0\refint\RocketLeague.dll
+D:\0zed\RocketLeague\obj\Debug\net10.0\RocketLeague.pdb
+D:\0zed\RocketLeague\obj\Debug\net10.0\RocketLeague.genruntimeconfig.cache
+D:\0zed\RocketLeague\obj\Debug\net10.0\ref\RocketLeague.dll
