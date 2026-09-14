@@ -1,11 +1,81 @@
 {
   "version": 4,
   "targets": {
-    "net10.0": {}
+    "net10.0": {
+      "Raylib-cs/8.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/Raylib-cs.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Raylib-cs.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/Raylib-cs.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/browser-wasm/native/raylib.a": {
+            "assetType": "native",
+            "rid": "browser-wasm"
+          },
+          "runtimes/linux-x64/native/libraylib.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/osx-arm64/native/libraylib.dylib": {
+            "assetType": "native",
+            "rid": "osx-arm64"
+          },
+          "runtimes/osx-x64/native/libraylib.dylib": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          },
+          "runtimes/win-x64/native/raylib.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/raylib.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Raylib-cs/8.1.0": {
+      "sha512": "5BH1IoueW/47PjykoD5rHSQGkfG/0ROdv1Lj/LiJ+m/KBmDAmDRyXRpgS/qOZL6ScIMtnY5nG31dQ58y/VVXUg==",
+      "type": "package",
+      "path": "raylib-cs/8.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "buildTransitive/Raylib-cs.targets",
+        "lib/net10.0/Raylib-cs.dll",
+        "lib/net10.0/Raylib-cs.xml",
+        "lib/net8.0/Raylib-cs.dll",
+        "lib/net8.0/Raylib-cs.xml",
+        "raylib-cs.8.1.0.nupkg.sha512",
+        "raylib-cs.nuspec",
+        "raylib-cs_64x64.png",
+        "runtimes/browser-wasm/native/raylib.a",
+        "runtimes/linux-x64/native/libraylib.so",
+        "runtimes/osx-arm64/native/libraylib.dylib",
+        "runtimes/osx-x64/native/libraylib.dylib",
+        "runtimes/win-x64/native/raylib.dll",
+        "runtimes/win-x86/native/raylib.dll"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net10.0": []
+    "net10.0": [
+      "raylib-cs >= 8.1.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Home\\.nuget\\packages\\": {}
@@ -51,6 +121,12 @@
       "net10.0": {
         "framework": "net10.0",
         "targetAlias": "net10.0",
+        "dependencies": {
+          "raylib-cs": {
+            "target": "Package",
+            "version": "[8.1.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
