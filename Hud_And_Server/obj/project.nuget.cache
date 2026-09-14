@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "aaPxsojgmTU=",
+  "success": true,
+  "projectFilePath": "D:\\0zed\\RocketLeague\\hud_and_server\\RocketLeague.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Home\\.nuget\\packages\\raylib-cs\\8.1.0\\raylib-cs.8.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}
