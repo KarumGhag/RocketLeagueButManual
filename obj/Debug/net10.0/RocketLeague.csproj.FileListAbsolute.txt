@@ -12,3 +12,4 @@ D:\0zed\RocketLeague\obj\Debug\net10.0\refint\RocketLeague.dll
 D:\0zed\RocketLeague\obj\Debug\net10.0\RocketLeague.pdb
 D:\0zed\RocketLeague\obj\Debug\net10.0\RocketLeague.genruntimeconfig.cache
 D:\0zed\RocketLeague\obj\Debug\net10.0\ref\RocketLeague.dll
+D:\0zed\RocketLeague\obj\Debug\net10.0\RocketLeague.sourcelink.json
