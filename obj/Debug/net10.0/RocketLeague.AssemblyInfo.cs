@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("rocketleague")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38b31c4e803ebe4cb4831465880a49f0e56b564a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7e3a3628b50d3d40bd86dc37db541bf56ccf0396")]
 [assembly: System.Reflection.AssemblyProductAttribute("rocketleague")]
 [assembly: System.Reflection.AssemblyTitleAttribute("rocketleague")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

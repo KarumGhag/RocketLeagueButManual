@@ -55,7 +55,7 @@
           }
         }
       },
-      "Nefarius.Utilities.DeviceManagement/5.2.0": {
+      "Nefarius.Utilities.DeviceManagement/6.1.0": {
         "type": "package",
         "compile": {
           "lib/net9.0/Nefarius.Utilities.DeviceManagement.dll": {
@@ -266,10 +266,10 @@
         "nefarius.drivers.hidhide.nuspec"
       ]
     },
-    "Nefarius.Utilities.DeviceManagement/5.2.0": {
-      "sha512": "ouzWKcW/43Pc0ogGCJsZdyjD3b6Jb6WUykHuRcjd8sV0EmuvCKanBKzDWgH01lyYpTtSugS4rOb9lL4Qbi0qbg==",
+    "Nefarius.Utilities.DeviceManagement/6.1.0": {
+      "sha512": "RlT/81XufI//vF374U1211wHq6+FYh4y/+A4LpGapgDKxJLspa07+7PSR5L5oReHNNsNK3rPfbTXsX9bayFgBA==",
       "type": "package",
-      "path": "nefarius.utilities.devicemanagement/5.2.0",
+      "path": "nefarius.utilities.devicemanagement/6.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -287,7 +287,7 @@
         "lib/netstandard2.0/Nefarius.Utilities.DeviceManagement.xml",
         "lib/netstandard2.1/Nefarius.Utilities.DeviceManagement.dll",
         "lib/netstandard2.1/Nefarius.Utilities.DeviceManagement.xml",
-        "nefarius.utilities.devicemanagement.5.2.0.nupkg.sha512",
+        "nefarius.utilities.devicemanagement.6.1.0.nupkg.sha512",
         "nefarius.utilities.devicemanagement.nuspec"
       ]
     },
@@ -430,6 +430,7 @@
   "projectFileDependencyGroups": {
     "net10.0": [
       "Nefarius.Drivers.HidHide >= 3.4.0",
+      "Nefarius.Utilities.DeviceManagement >= 6.1.0",
       "Raylib-cs >= 8.1.0"
     ]
   },
@@ -481,6 +482,10 @@
           "Nefarius.Drivers.HidHide": {
             "target": "Package",
             "version": "[3.4.0, )"
+          },
+          "Nefarius.Utilities.DeviceManagement": {
+            "target": "Package",
+            "version": "[6.1.0, )"
           },
           "Raylib-cs": {
             "target": "Package",

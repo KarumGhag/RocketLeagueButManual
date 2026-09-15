@@ -50,6 +50,10 @@
               "target": "Package",
               "version": "[3.4.0, )"
             },
+            "Nefarius.Utilities.DeviceManagement": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            },
             "Raylib-cs": {
               "target": "Package",
               "version": "[8.1.0, )"
