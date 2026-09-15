@@ -1,7 +1,6 @@
-﻿using Speed.Extractor;
+﻿using Speed.Server;
 using RocketLeague.HUD;
 
-SpeedExtractor speedExtractor = new SpeedExtractor();
 HUD hud = new HUD();
 
 // Conversion factor from km/h to MPH
@@ -15,6 +14,8 @@ void Main()
 
 async void UpdateSpeed()
 {
+    SpeedExtractor speedExtractor = new SpeedExtractor();
+
     while (true)
     {
         // Speed received directly from the API in km/h
