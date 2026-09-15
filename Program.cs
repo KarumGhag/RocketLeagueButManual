@@ -1,10 +1,12 @@
 ﻿using Speed.Server;
 using RocketLeague.HUD;
 using Controller.Hider;
+using Controller.InputDetection;
 
-HUD hud = new HUD();
 Hider hider = new Hider();
+InputDetection inputDetector = new InputDetection();
 
+HUD hud = new HUD(hider, inputDetector);
 
 // Conversion factor from km/h to MPH
 const double KmhToMphFactor = 0.621371;
@@ -14,7 +16,7 @@ void Main()
     Hider hider = new Hider();
     hider.Hide();
     Task.Run(UpdateSpeed);
-    hud.hider = hider;
+
     hud.MakeHUD();
 }
 

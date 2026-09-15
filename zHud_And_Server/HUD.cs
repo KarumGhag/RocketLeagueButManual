@@ -1,13 +1,21 @@
 using Raylib_cs;
 using Controller.Hider;
+using Controller.InputDetection;
 
 namespace RocketLeague.HUD;
 
 public class HUD
 {
-    public Hider? hider;
+    Hider? hider;
+    InputDetection? inputDetector;
 
     private double currentSpeed;
+
+    public HUD(Hider hider, InputDetection inputDetector)
+    {
+        this.hider = hider;
+        this.inputDetector = inputDetector;
+    }
 
     public void UpdateSpeedValue(double speed)
     {
