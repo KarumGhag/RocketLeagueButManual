@@ -1,4 +1,4 @@
-﻿using Speed.Extractor;
+﻿using Speed.Server;
 using RocketLeague.HUD;
 
 SpeedExtractor speedExtractor = new SpeedExtractor();
