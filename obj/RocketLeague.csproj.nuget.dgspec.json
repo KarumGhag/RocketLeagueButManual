@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\0zed\\RocketLeague\\hud_and_server\\RocketLeague.csproj": {}
+    "D:\\0zed\\RocketLeague\\rocketleague.csproj": {}
   },
   "projects": {
-    "D:\\0zed\\RocketLeague\\hud_and_server\\RocketLeague.csproj": {
+    "D:\\0zed\\RocketLeague\\rocketleague.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\0zed\\RocketLeague\\hud_and_server\\RocketLeague.csproj",
-        "projectName": "RocketLeague",
-        "projectPath": "D:\\0zed\\RocketLeague\\hud_and_server\\RocketLeague.csproj",
+        "projectUniqueName": "D:\\0zed\\RocketLeague\\rocketleague.csproj",
+        "projectName": "rocketleague",
+        "projectPath": "D:\\0zed\\RocketLeague\\rocketleague.csproj",
         "packagesPath": "C:\\Users\\Home\\.nuget\\packages\\",
-        "outputPath": "D:\\0zed\\RocketLeague\\hud_and_server\\obj\\",
+        "outputPath": "D:\\0zed\\RocketLeague\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Home\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -46,6 +46,10 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
+            "Nefarius.Drivers.HidHide": {
+              "target": "Package",
+              "version": "[3.4.0, )"
+            },
             "Raylib-cs": {
               "target": "Package",
               "version": "[8.1.0, )"
