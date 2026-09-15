@@ -49,7 +49,6 @@ public class HUD
 
             if (Raylib.IsKeyReleased(KeyboardKey.Space))
             {
-                Console.WriteLine("toggle hide");
                 hider.controlService.IsActive = !hider.controlService.IsActive;
             }
 
