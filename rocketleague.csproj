@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Nefarius.Drivers.HidHide" Version="3.4.0" />
+    <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="6.1.0" />
     <PackageReference Include="Raylib-cs" Version="8.1.0" />
   </ItemGroup>
 

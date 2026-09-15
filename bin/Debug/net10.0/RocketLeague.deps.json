@@ -6,12 +6,62 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "RocketLeague/1.0.0": {
+      "rocketleague/1.0.0": {
         "dependencies": {
+          "Nefarius.Drivers.HidHide": "3.4.0",
+          "Nefarius.Utilities.DeviceManagement": "6.1.0",
           "Raylib-cs": "8.1.0"
         },
         "runtime": {
-          "RocketLeague.dll": {}
+          "rocketleague.dll": {}
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/10.0.8": {
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.826.23019"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/10.0.8": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.8"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.826.23019"
+          }
+        }
+      },
+      "Nefarius.Drivers.HidHide/3.4.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.8",
+          "Nefarius.Utilities.DeviceManagement": "6.1.0",
+          "Nefarius.Vicius.Abstractions": "1.4.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Nefarius.Drivers.HidHide.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.4.0.0"
+          }
+        }
+      },
+      "Nefarius.Utilities.DeviceManagement/6.1.0": {
+        "runtime": {
+          "lib/net9.0/Nefarius.Utilities.DeviceManagement.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.1.0.0"
+          }
+        }
+      },
+      "Nefarius.Vicius.Abstractions/1.4.1": {
+        "runtime": {
+          "lib/net9.0/Nefarius.Vicius.Abstractions.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.4.1.0"
+          }
         }
       },
       "Raylib-cs/8.1.0": {
@@ -57,10 +107,45 @@
     }
   },
   "libraries": {
-    "RocketLeague/1.0.0": {
+    "rocketleague/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/10.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-21nbDV60SRPWGIivsyl6lqBeEJNG1sginhhfWgRrr3Ais7aQ12To25OAHQxgoiJkjqy1aQ6RxpZBGYuTi7Ge6A==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/10.0.8",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.10.0.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/10.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fdVadZmsC8jRP0KvKy8mO8f6GV/HyBvElfcSxEhd+5FM5boAw/01iSaCto5G3G37ApJira4A3pNaVvBv8cUiLQ==",
+      "path": "microsoft.extensions.logging.abstractions/10.0.8",
+      "hashPath": "microsoft.extensions.logging.abstractions.10.0.8.nupkg.sha512"
+    },
+    "Nefarius.Drivers.HidHide/3.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nlPmPQKtDK71zL+rfIbKyUKbMgxnOfPs1P82yqKKfv8NqUQbJKcUrYtBoqmg8oNH/pEeEojBcXnC4SmWUoJajQ==",
+      "path": "nefarius.drivers.hidhide/3.4.0",
+      "hashPath": "nefarius.drivers.hidhide.3.4.0.nupkg.sha512"
+    },
+    "Nefarius.Utilities.DeviceManagement/6.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RlT/81XufI//vF374U1211wHq6+FYh4y/+A4LpGapgDKxJLspa07+7PSR5L5oReHNNsNK3rPfbTXsX9bayFgBA==",
+      "path": "nefarius.utilities.devicemanagement/6.1.0",
+      "hashPath": "nefarius.utilities.devicemanagement.6.1.0.nupkg.sha512"
+    },
+    "Nefarius.Vicius.Abstractions/1.4.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NnzB+MHb9WCdOQ856QlgB59l9O/lb9iGU7l7Sq7Zxg8fg62IfdRI0bwRwRDeKGtpm3dbOZtonuO6gVvm0DbzNA==",
+      "path": "nefarius.vicius.abstractions/1.4.1",
+      "hashPath": "nefarius.vicius.abstractions.1.4.1.nupkg.sha512"
     },
     "Raylib-cs/8.1.0": {
       "type": "package",

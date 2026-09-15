@@ -1,10 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "aaPxsojgmTU=",
+  "dgSpecHash": "ffxNDGtgc+0=",
   "success": true,
-  "projectFilePath": "D:\\0zed\\RocketLeague\\hud_and_server\\RocketLeague.csproj",
+  "projectFilePath": "D:\\0zed\\RocketLeague\\rocketleague.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Home\\.nuget\\packages\\raylib-cs\\8.1.0\\raylib-cs.8.1.0.nupkg.sha512"
+    "C:\\Users\\Home\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.8\\microsoft.extensions.dependencyinjection.abstractions.10.0.8.nupkg.sha512",
+    "C:\\Users\\Home\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.8\\microsoft.extensions.logging.abstractions.10.0.8.nupkg.sha512",
+    "C:\\Users\\Home\\.nuget\\packages\\nefarius.drivers.hidhide\\3.4.0\\nefarius.drivers.hidhide.3.4.0.nupkg.sha512",
+    "C:\\Users\\Home\\.nuget\\packages\\nefarius.utilities.devicemanagement\\6.1.0\\nefarius.utilities.devicemanagement.6.1.0.nupkg.sha512",
+    "C:\\Users\\Home\\.nuget\\packages\\nefarius.vicius.abstractions\\1.4.1\\nefarius.vicius.abstractions.1.4.1.nupkg.sha512",
+    "C:\\Users\\Home\\.nuget\\packages\\raylib-cs\\8.1.0\\raylib-cs.8.1.0.nupkg.sha512",
+    "C:\\Users\\Home\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }
