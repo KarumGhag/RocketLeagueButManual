@@ -3,11 +3,25 @@ using XInputController = SharpDX.XInput.Controller;
 
 namespace Controller.InputDetection;
 
-public class InputDetection
+public class InputDetector
 {
+
+    XInputController controller;
+
+    public InputDetector()
+    {
+        // Check all 4 player slots to find where the controller lives
+        controller = new XInputController(UserIndex.One);
+    }
     public void GetInput()
     {
-        XInputController controller = new XInputController();
+
+        if (!controller.IsConnected)
+        {
+            Console.WriteLine("Controller not found");
+            return;
+        }
+
         State state = controller.GetState();
         Console.WriteLine(state.ToString());
     }

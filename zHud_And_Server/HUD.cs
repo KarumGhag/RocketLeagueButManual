@@ -7,11 +7,11 @@ namespace RocketLeague.HUD;
 public class HUD
 {
     Hider? hider;
-    InputDetection? inputDetector;
+    InputDetector? inputDetector;
 
     private double currentSpeed;
 
-    public HUD(Hider hider, InputDetection inputDetector)
+    public HUD(Hider hider, InputDetector inputDetector)
     {
         this.hider = hider;
         this.inputDetector = inputDetector;
@@ -47,6 +47,7 @@ public class HUD
 
             // Render live speed value
             Raylib.DrawText($"{currentSpeed:F1} MPH", 15, 12, 24, Color.Lime);
+
             if (hider.controlService.IsActive)
             {
                 Raylib.DrawText("Hidden", 15, 34, 24, Color.Red);
@@ -59,6 +60,9 @@ public class HUD
             {
                 hider.controlService.IsActive = !hider.controlService.IsActive;
             }
+
+
+            inputDetector.GetInput();
 
             Raylib.EndDrawing();
         }
