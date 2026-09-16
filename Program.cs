@@ -2,13 +2,14 @@
 using RocketLeague.HUD;
 using Controller.Hider;
 using Controller.InputDetection;
-
+using Controller.GhostController;
 
 
 Hider hider = new Hider();
 InputDetector inputDetector = new InputDetector();
+GhostController ghostController = new GhostController();
 
-HUD hud = new HUD(hider, inputDetector);
+HUD hud = new HUD(hider, inputDetector, ghostController);
 
 
 
