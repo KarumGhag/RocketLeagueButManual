@@ -1,6 +1,9 @@
 using Raylib_cs;
 using Controller.Hider;
 using Controller.InputDetection;
+using Controller.GhostController;
+using SharpDX.XInput;
+using XInputController = SharpDX.XInput.Controller;
 
 namespace RocketLeague.HUD;
 
@@ -9,12 +12,16 @@ public class HUD
     readonly Hider? hider;
     readonly InputDetector? inputDetector;
 
-    private double currentSpeed;
+    double currentSpeed;
 
-    public HUD(Hider hider, InputDetector inputDetector)
+    readonly GhostController ghostController;
+    ControllerState controllerState;
+
+    public HUD(Hider hider, InputDetector inputDetector, GhostController ghostController)
     {
         this.hider = hider;
         this.inputDetector = inputDetector;
+        this.ghostController = ghostController;
     }
 
     public void UpdateSpeedValue(double speed)
@@ -33,7 +40,7 @@ public class HUD
         );
 
         // Compact 200x50 window setup
-        Raylib.InitWindow(200, 200, "Speed HUD");
+        Raylib.InitWindow(200, 400, "Speed HUD");
         Raylib.SetTargetFPS(60);
         Raylib.SetWindowPosition(0, 0);
 
@@ -43,7 +50,7 @@ public class HUD
             Raylib.ClearBackground(Color.Blank);
 
             // Semi-transparent dark background card
-            Raylib.DrawRectangle(0, 0, 200, 60, new Color(0, 0, 0, 180));
+            Raylib.DrawRectangle(0, 0, 200, 120, new Color(0, 0, 0, 180));
 
             // Render live speed value
             Raylib.DrawText($"{currentSpeed:F1} MPH", 15, 12, 24, Color.Lime);
@@ -57,17 +64,21 @@ public class HUD
                 Raylib.DrawText("Showing", 15, 34, 24, Color.Lime);
             }
 
-            inputDetector!.DetectInputs();
-            Raylib.DrawText($"Clutch: {inputDetector.clutchValue}", 15, 56, 24, Color.Lime);
-
-
             if (Raylib.IsKeyReleased(KeyboardKey.Space))
             {
                 hider.controlService.IsActive = !hider.controlService.IsActive;
             }
 
 
-            inputDetector.DetectInputs();
+
+            controllerState = inputDetector!.DetectInputs();
+            Raylib.DrawText($"Clutch: {controllerState.clutch}", 15, 56, 24, Color.Lime);
+            Raylib.DrawText($"Accel: {controllerState.accel}", 15, 80, 24, Color.Lime);
+            Raylib.DrawText($"Buttons: {controllerState.buttons}", 15, 104, 24, Color.Lime);
+
+            ghostController.Update(controllerState);
+
+
 
             Raylib.EndDrawing();
         }

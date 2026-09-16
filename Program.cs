@@ -2,13 +2,14 @@
 using RocketLeague.HUD;
 using Controller.Hider;
 using Controller.InputDetection;
-
+using Controller.GhostController;
 
 
 Hider hider = new Hider();
 InputDetector inputDetector = new InputDetector();
+GhostController ghostController = new GhostController();
 
-HUD hud = new HUD(hider, inputDetector);
+HUD hud = new HUD(hider, inputDetector, ghostController);
 
 
 
@@ -45,3 +46,18 @@ async void UpdateSpeed()
 }
 
 Main();
+
+
+
+
+/*
+Steps to get working:
+1. Go to hid hide, disable device hiding, un plug re plug
+2. Close hid hide, start this program, un plug re plug
+3. Stop this program
+4. Open rocket league
+6. Go to free play
+7. Try move, you should not be able to move
+8. Start the program
+9. Try move
+*/
