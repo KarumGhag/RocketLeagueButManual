@@ -20,13 +20,18 @@ void Main()
 {
     Hider hider = new Hider();
     hider.Hide();
-    //Task.Run(UpdateSpeed);
+    Task.Run(UpdateSpeed);
     hud.MakeHUD();
 }
 
 async void UpdateSpeed()
 {
     SpeedExtractor speedExtractor = new SpeedExtractor();
+    if (speedExtractor.Connect() == -1)
+    {
+        Console.WriteLine("connection failed!");
+        return;
+    }
 
     while (true)
     {
@@ -43,7 +48,7 @@ async void UpdateSpeed()
         hud.UpdateSpeedValue(kmhSpeed);
         await Task.Delay(16);
     }
-}
+    }
 
 Main();
 
