@@ -6,14 +6,18 @@ namespace Controller.InputDetection;
 public class InputDetector
 {
 
-    XInputController controller;
+    readonly XInputController controller;
+
+    public byte clutchValue;
+    public byte accelValue;
+    public GamepadButtonFlags buttons;
 
     public InputDetector()
     {
         // Check all 4 player slots to find where the controller lives
         controller = new XInputController(UserIndex.One);
     }
-    public void GetInput()
+    public void DetectInputs()
     {
 
         if (!controller.IsConnected)
@@ -23,6 +27,11 @@ public class InputDetector
         }
 
         State state = controller.GetState();
-        Console.WriteLine(state.ToString());
+        Gamepad gamepad = state.Gamepad;
+
+
+        buttons = state.Gamepad.Buttons;
+        clutchValue = gamepad.LeftTrigger;
+        accelValue = gamepad.RightTrigger;
     }
 }

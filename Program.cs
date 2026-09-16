@@ -20,7 +20,6 @@ void Main()
     Hider hider = new Hider();
     hider.Hide();
     //Task.Run(UpdateSpeed);
-
     hud.MakeHUD();
 }
 

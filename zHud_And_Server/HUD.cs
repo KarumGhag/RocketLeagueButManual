@@ -6,8 +6,8 @@ namespace RocketLeague.HUD;
 
 public class HUD
 {
-    Hider? hider;
-    InputDetector? inputDetector;
+    readonly Hider? hider;
+    readonly InputDetector? inputDetector;
 
     private double currentSpeed;
 
@@ -51,9 +51,14 @@ public class HUD
             if (hider.controlService.IsActive)
             {
                 Raylib.DrawText("Hidden", 15, 34, 24, Color.Red);
-            } else {
+            }
+            else
+            {
                 Raylib.DrawText("Showing", 15, 34, 24, Color.Lime);
             }
+
+            inputDetector!.DetectInputs();
+            Raylib.DrawText($"Clutch: {inputDetector.clutchValue}", 15, 56, 24, Color.Lime);
 
 
             if (Raylib.IsKeyReleased(KeyboardKey.Space))
@@ -62,7 +67,7 @@ public class HUD
             }
 
 
-            inputDetector.GetInput();
+            inputDetector.DetectInputs();
 
             Raylib.EndDrawing();
         }
