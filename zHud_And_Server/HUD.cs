@@ -2,6 +2,8 @@ using Raylib_cs;
 using Controller.Hider;
 using Controller.InputDetection;
 using Controller.GhostController;
+using SharpDX.XInput;
+using XInputController = SharpDX.XInput.Controller;
 
 namespace RocketLeague.HUD;
 
