@@ -17,13 +17,14 @@ public class InputDetector
         // Check all 4 player slots to find where the controller lives
         controller = new XInputController(UserIndex.One);
     }
-    public void DetectInputs()
+
+    public ControllerState DetectInputs()
     {
 
         if (!controller.IsConnected)
         {
             Console.WriteLine("Controller not found");
-            return;
+            return new ControllerState(0, 0, buttons);
         }
 
         State state = controller.GetState();
@@ -33,5 +34,21 @@ public class InputDetector
         buttons = state.Gamepad.Buttons;
         clutchValue = gamepad.LeftTrigger;
         accelValue = gamepad.RightTrigger;
+
+        return new ControllerState(clutchValue, accelValue, buttons);
+    }
+}
+
+public struct ControllerState
+{
+    public byte clutch;
+    public byte accel;
+    public GamepadButtonFlags buttons;
+
+    public ControllerState(byte clutch, byte accel, GamepadButtonFlags buttons)
+    {
+        this.clutch = clutch;
+        this.accel = accel;
+        this.buttons = buttons;
     }
 }

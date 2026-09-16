@@ -12,7 +12,8 @@ public class HUD
 
     double currentSpeed;
 
-    GhostController ghostController;
+    readonly GhostController ghostController;
+    ControllerState controllerState;
 
     public HUD(Hider hider, InputDetector inputDetector, GhostController ghostController)
     {
@@ -61,19 +62,21 @@ public class HUD
                 Raylib.DrawText("Showing", 15, 34, 24, Color.Lime);
             }
 
-            inputDetector!.DetectInputs();
-            Raylib.DrawText($"Clutch: {inputDetector.clutchValue}", 15, 56, 24, Color.Lime);
-            Raylib.DrawText($"Accel: {inputDetector.accelValue}", 15, 80, 24, Color.Lime);
-
-
-
             if (Raylib.IsKeyReleased(KeyboardKey.Space))
             {
                 hider.controlService.IsActive = !hider.controlService.IsActive;
             }
 
 
-            ghostController.Update(inputDetector.accelValue);
+
+            controllerState = inputDetector!.DetectInputs();
+            Raylib.DrawText($"Clutch: {controllerState.clutch}", 15, 56, 24, Color.Lime);
+            Raylib.DrawText($"Accel: {controllerState.accel}", 15, 80, 24, Color.Lime);
+            Raylib.DrawText($"Buttons: {controllerState.buttons}", 15, 104, 24, Color.Lime);
+
+            ghostController.Update(controllerState);
+
+
 
             Raylib.EndDrawing();
         }
