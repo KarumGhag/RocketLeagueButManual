@@ -11,9 +11,18 @@ public class SpeedExtractor
 
     TcpClient client;
 
-    public SpeedExtractor()
+    public int Connect()
     {
-        client = new TcpClient(host, port);
+        try
+        {
+            client = new TcpClient(host, port);
+        }
+        catch
+        {
+            return -1;
+        }
+
+        return 1;
     }
 
     public async Task<double> GetSpeed()
