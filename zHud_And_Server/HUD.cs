@@ -55,7 +55,7 @@ public class HUD
             // Render live speed value
             Raylib.DrawText($"{currentSpeed:F1} MPH", 15, 12, 24, Color.Lime);
 
-            if (hider.controlService.IsActive)
+            if (hider!.controlService.IsActive)
             {
                 Raylib.DrawText("Hidden", 15, 34, 24, Color.Red);
             }
