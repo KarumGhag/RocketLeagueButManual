@@ -9,6 +9,7 @@ public class Hider
 {
     public HidHideControlService controlService;
     string rocketLeague = @"D:\Unreal Engine\rocketleague\Binaries\Win64\RocketLeague.exe";
+    string thisPath = @"D:\0zed\RocketLeague\bin\Debug\net10.0\rocketleague.exe";
     string controllerID = @"USB\VID_045E&PID_0B12\3039373130313130393937333238";
 
     public Hider()
@@ -19,6 +20,7 @@ public class Hider
     public void Hide()
     {
         controlService.AddBlockedInstanceId(controllerID);
+        controlService.AddApplicationPath(thisPath);
 
         controlService.IsActive = true;
 

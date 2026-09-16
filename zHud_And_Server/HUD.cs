@@ -1,13 +1,21 @@
 using Raylib_cs;
 using Controller.Hider;
+using Controller.InputDetection;
 
 namespace RocketLeague.HUD;
 
 public class HUD
 {
-    public Hider? hider;
+    readonly Hider? hider;
+    readonly InputDetector? inputDetector;
 
     private double currentSpeed;
+
+    public HUD(Hider hider, InputDetector inputDetector)
+    {
+        this.hider = hider;
+        this.inputDetector = inputDetector;
+    }
 
     public void UpdateSpeedValue(double speed)
     {
@@ -39,18 +47,27 @@ public class HUD
 
             // Render live speed value
             Raylib.DrawText($"{currentSpeed:F1} MPH", 15, 12, 24, Color.Lime);
+
             if (hider.controlService.IsActive)
             {
                 Raylib.DrawText("Hidden", 15, 34, 24, Color.Red);
-            } else {
+            }
+            else
+            {
                 Raylib.DrawText("Showing", 15, 34, 24, Color.Lime);
             }
+
+            inputDetector!.DetectInputs();
+            Raylib.DrawText($"Clutch: {inputDetector.clutchValue}", 15, 56, 24, Color.Lime);
 
 
             if (Raylib.IsKeyReleased(KeyboardKey.Space))
             {
                 hider.controlService.IsActive = !hider.controlService.IsActive;
             }
+
+
+            inputDetector.DetectInputs();
 
             Raylib.EndDrawing();
         }
