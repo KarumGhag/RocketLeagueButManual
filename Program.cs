@@ -1,8 +1,11 @@
-﻿using Speed.Server;
+﻿using System.Threading;
+using Speed.Server;
 using RocketLeague.HUD;
 using Controller.Hider;
 using Controller.InputDetection;
 using Controller.GhostController;
+using System.Net;
+using System.Collections;
 
 
 Hider hider = new Hider();
@@ -21,7 +24,25 @@ void Main()
     Hider hider = new Hider();
     hider.Hide();
     Task.Run(UpdateSpeed);
-    hud.MakeHUD();
+
+    Thread hudThread = new Thread(hud.MakeHUD);
+    hudThread.Start();
+
+    Thread controllerThread = new Thread(InputUpdates);
+    controllerThread.Start();
+}
+
+
+void InputUpdates()
+{
+    while (true)
+    {
+        ControllerState controllerState;
+        controllerState = inputDetector.DetectInputs();
+
+        ghostController.Update(controllerState);
+        Console.WriteLine("updated");
+    }
 }
 
 async void UpdateSpeed()
@@ -48,7 +69,7 @@ async void UpdateSpeed()
         hud.UpdateSpeedValue(kmhSpeed);
         await Task.Delay(16);
     }
-    }
+}
 
 Main();
 

@@ -9,7 +9,7 @@ public class SpeedExtractor
     const string host = "127.0.0.1";
     const int port = 49123;
 
-    TcpClient client;
+    TcpClient? client;
 
     public int Connect()
     {
@@ -27,7 +27,7 @@ public class SpeedExtractor
 
     public async Task<double> GetSpeed()
     {
-        NetworkStream stream = client.GetStream();
+        NetworkStream stream = client!.GetStream();
 
         byte[] buffer = new byte[16384];
 

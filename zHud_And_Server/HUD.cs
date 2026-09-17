@@ -13,6 +13,9 @@ public class HUD
     readonly InputDetector? inputDetector;
 
     double currentSpeed;
+    byte clutch;
+    byte accel;
+    GamepadButtonFlags buttons;
 
     readonly GhostController ghostController;
     ControllerState controllerState;
@@ -71,18 +74,21 @@ public class HUD
 
 
 
-            controllerState = inputDetector!.DetectInputs();
-            Raylib.DrawText($"Clutch: {controllerState.clutch}", 15, 56, 24, Color.Lime);
-            Raylib.DrawText($"Accel: {controllerState.accel}", 15, 80, 24, Color.Lime);
-            Raylib.DrawText($"Buttons: {controllerState.buttons}", 15, 104, 24, Color.Lime);
-
-            ghostController.Update(controllerState);
-
-
+            Raylib.DrawText($"Clutch: {clutch}", 15, 56, 24, Color.Lime);
+            Raylib.DrawText($"Accel: {accel}", 15, 80, 24, Color.Lime);
+            Raylib.DrawText($"Buttons: {buttons}", 15, 104, 24, Color.Lime);
 
             Raylib.EndDrawing();
         }
 
         Raylib.CloseWindow();
+    }
+
+    public void UpdateHudValues(double speed, byte clutch, byte accel, GamepadButtonFlags buttons)
+    {
+        currentSpeed = speed;
+        this.clutch = clutch;
+        this.accel = accel;
+        this.buttons = buttons;
     }
 }
