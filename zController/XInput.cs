@@ -21,10 +21,10 @@ public class InputDetector
 
     public GamepadButtonFlags buttons;
 
-    public InputDetector()
+    public InputDetector(UserIndex physicalIndex)
     {
         // Check all 4 player slots to find where the controller lives
-        controller = new XInputController(UserIndex.One);
+        controller = new XInputController(physicalIndex);
         Console.WriteLine($"Physical XInput UserIndex: {controller.UserIndex}");
     }
 
