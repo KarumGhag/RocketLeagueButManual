@@ -24,16 +24,26 @@ Main();
 void Main()
 {
     hider.Hide();
+
+    Thread hudThread = new Thread(new ThreadStart(hud.MakeHUD));
+    hudThread.Start();
+
+    Thread controllerThread = new Thread(new ThreadStart(UpdateController));
+    controllerThread.Start();
+
     Task.Run(UpdateSpeed);
-    Thread HudThread = new Thread(new ThreadStart(hud.MakeHUD));
-    HudThread.Start();
-    HudThread.Join();
+    controllerThread.Join();
+    hudThread.Join();
 }
 
 void UpdateController()
 {
-    ControllerState controllerState = inputDetector.DetectInputs();
-    ghostController.Update(controllerState);
+    while (true)
+    {
+        ControllerState controllerState = inputDetector.DetectInputs();
+        ghostController.Update(controllerState);
+        hud.UpdateControllerState(controllerState);
+    }
 }
 
 async void UpdateSpeed()
