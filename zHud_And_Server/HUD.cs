@@ -29,6 +29,11 @@ public class HUD
         currentSpeed = speed;
     }
 
+    public void UpdateControllerState(ControllerState controllerState)
+    {
+        this.controllerState = controllerState;
+    }
+
     public void MakeHUD()
     {
         // Pure Raylib window flag configuration
