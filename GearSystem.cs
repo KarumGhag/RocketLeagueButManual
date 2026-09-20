@@ -32,8 +32,8 @@ public class GearSwitcher
         Fifth   = 6,
         Boost   = 7
     }
-    int currentGearIndex = 1;
     Gear currentGear;
+    GearNameIDS currentGearEnum = GearNameIDS.Neutral;
 
     void PopulateGears()
     {
@@ -54,29 +54,19 @@ public class GearSwitcher
         PopulateGears();
     }
 
-    int findIndex(string name)
-    {
-        for (int i = 0; i < gears.Length; i++)
-        {
-            if (gears[i].gearName == name) return i;
-        }
-
-        return (int)GearNameIDS.Neutral; // neutral
-    }
-
     public Gear GearUp(float currentSpeed)
     {
-        currentGearIndex = findIndex(currentGear.gearName);
+        int currentGearIndex = (int)currentGearEnum;
 
         if (currentGearIndex + 1 >= gears.Length) return gears[(int)GearNameIDS.Boost];
 
+        if (currentSpeed > gears[currentGearIndex + 1].entrySpeed)
+        {
+            currentGearEnum++;
+        } else {
+            return gears[(int)GearNameIDS.Neutral]; // stall
+        }
 
-        return currentGear;
-    }
-    public Gear GearDown(float currentSpeed)
-    {
-        if (currentGearIndex - 1 < 0) return gears[(int)GearNameIDS.Neutral];
-
-        return currentGear;
+        return gears[(int)currentGearEnum];
     }
 }
