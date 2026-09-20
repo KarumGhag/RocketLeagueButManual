@@ -56,7 +56,6 @@ public static class GearSwitcher
 
     public static Gear GearUp(float currentSpeed)
     {
-        Console.WriteLine(currentGearEnum);
         int currentGearIndex = (int)currentGearEnum;
 
         if (currentGearIndex + 1 >= gears.Length) return gears[(int)GearNameIDS.Boost];
@@ -79,6 +78,7 @@ public static class GearSwitcher
         int currentGearIndex = (int)currentGearEnum;
         // gear down in neutral puts you in reverse
         if (currentGearEnum == GearNameIDS.Neutral) return gears[(int)GearNameIDS.Reverse];
+
         if (currentGearIndex - 1 < 0) return gears[(int)GearNameIDS.Neutral];
 
         if (currentSpeed < gears[currentGearIndex - 1].maxSpeed)
@@ -87,6 +87,7 @@ public static class GearSwitcher
         }
         else
         {
+            currentGearEnum = GearNameIDS.Neutral;
             return gears[(int)GearNameIDS.Neutral]; // stall
         }
 

@@ -71,8 +71,13 @@ void Update()
         if (controllerState.buttons.HasFlag(GamepadButtonFlags.RightShoulder) && !lastFrameState.buttons.HasFlag(GamepadButtonFlags.RightShoulder))
         {
             currentGear = GearSwitcher.GearUp(currentSpeed);
-            Console.WriteLine("test");
         }
+
+        if (controllerState.buttons.HasFlag(GamepadButtonFlags.LeftShoulder) && !lastFrameState.buttons.HasFlag(GamepadButtonFlags.LeftShoulder))
+        {
+            currentGear = GearSwitcher.GeadDown(currentSpeed);
+        }
+
 
         if (currentSpeed > currentGear.maxSpeed)
         {
