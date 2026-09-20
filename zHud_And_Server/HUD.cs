@@ -17,6 +17,8 @@ public class HUD
     readonly GhostController ghostController;
     ControllerState controllerState;
 
+    public int change;
+
     public HUD(Hider hider, InputDetector inputDetector, GhostController ghostController)
     {
         this.hider = hider;
@@ -55,7 +57,8 @@ public class HUD
             Raylib.ClearBackground(Color.Blank);
 
             // Semi-transparent dark background card
-            Raylib.DrawRectangle(0, 0, 200, 120, new Color(0, 0, 0, 180));
+            // for the y add 25 for each line of text at font 24
+            Raylib.DrawRectangle(0, 0, 200, 150, new Color(0, 0, 0, 180));
 
             // Render live speed value
             Raylib.DrawText($"{currentSpeed:F1} MPH", 15, 12, 24, Color.Lime);
@@ -79,6 +82,7 @@ public class HUD
             Raylib.DrawText($"Clutch: {controllerState.clutch}", 15, 56, 24, Color.Lime);
             Raylib.DrawText($"Accel: {controllerState.accel}", 15, 80, 24, Color.Lime);
             Raylib.DrawText($"Buttons: {controllerState.buttons}", 15, 104, 24, Color.Lime);
+            Raylib.DrawText($"Change: {change}", 15, 128, 24 , Color.Lime);
 
             Raylib.EndDrawing();
         }
