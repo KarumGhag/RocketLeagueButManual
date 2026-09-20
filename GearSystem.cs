@@ -63,7 +63,28 @@ public class GearSwitcher
         if (currentSpeed > gears[currentGearIndex + 1].entrySpeed)
         {
             currentGearEnum++;
-        } else {
+        }
+        else
+        {
+            return gears[(int)GearNameIDS.Neutral]; // stall
+        }
+
+        return gears[(int)currentGearEnum];
+    }
+
+    public Gear GeadDown(float currentSpeed)
+    {
+        int currentGearIndex = (int)currentGearEnum;
+        // gear down in neutral puts you in reverse
+        if (currentGearEnum == GearNameIDS.Neutral) return gears[(int)GearNameIDS.Reverse];
+        if (currentGearIndex - 1 < 0) return gears[(int)GearNameIDS.Neutral];
+
+        if (currentSpeed < gears[currentGearIndex - 1].maxSpeed)
+        {
+            currentGearEnum--;
+        }
+        else
+        {
             return gears[(int)GearNameIDS.Neutral]; // stall
         }
 
