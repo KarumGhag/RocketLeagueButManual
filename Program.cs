@@ -94,10 +94,6 @@ UserIndex FindPhysicalControllerSlot()
     );
 }
 
-Main();
-
-
-
 
 /*
 Steps to get working:
