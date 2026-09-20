@@ -10,17 +10,17 @@ public readonly struct Gear
     public readonly float maxSpeed;
     public readonly float entrySpeed;
 
-    public Gear(string gear, float maxSpeed, float entrySpeed)
+    public Gear(string gearName, float maxSpeed, float entrySpeed)
     {
-        this.gearName = gear;
+        this.gearName = gearName;
         this.maxSpeed = maxSpeed;
         this.entrySpeed = entrySpeed;
     }
 }
 
-public class GearSwitcher
+public static class GearSwitcher
 {
-    readonly Gear[] gears = new Gear[8];
+    static readonly Gear[] gears = new Gear[8];
     enum GearNameIDS : int
     {
         Neutral = 0,
@@ -32,10 +32,10 @@ public class GearSwitcher
         Fifth   = 6,
         Boost   = 7
     }
-    Gear currentGear;
-    GearNameIDS currentGearEnum = GearNameIDS.Neutral;
+    static Gear currentGear;
+    static GearNameIDS currentGearEnum = GearNameIDS.Neutral;
 
-    void PopulateGears()
+    public static void PopulateGears()
     {
         gears[0] = new Gear("neutral", 2, -1); // -1 means any entry speed
         gears[1] = new Gear("reverse", 10, 0);
@@ -49,12 +49,12 @@ public class GearSwitcher
         currentGear = gears[1];
     }
 
-    public GearSwitcher()
+    static GearSwitcher()
     {
         PopulateGears();
     }
 
-    public Gear GearUp(float currentSpeed)
+    public static Gear GearUp(float currentSpeed)
     {
         int currentGearIndex = (int)currentGearEnum;
 
@@ -72,7 +72,7 @@ public class GearSwitcher
         return gears[(int)currentGearEnum];
     }
 
-    public Gear GeadDown(float currentSpeed)
+    public static Gear GeadDown(float currentSpeed)
     {
         int currentGearIndex = (int)currentGearEnum;
         // gear down in neutral puts you in reverse

@@ -5,6 +5,7 @@ using Controller.InputDetection;
 using Controller.GhostController;
 using SharpDX.XInput;
 using XInputController = SharpDX.XInput.Controller;
+using GearSystem;
 
 // Conversion factor from km/h to MPH
 const double KmhToMphFactor = 0.621371;
@@ -28,7 +29,7 @@ void Main()
     Thread hudThread = new Thread(new ThreadStart(hud.MakeHUD));
     hudThread.Start();
 
-    Thread controllerThread = new Thread(new ThreadStart(UpdateController));
+    Thread controllerThread = new Thread(new ThreadStart(Update));
     controllerThread.Start();
 
     Task.Run(UpdateSpeed);
@@ -36,7 +37,7 @@ void Main()
     hudThread.Join();
 }
 
-void UpdateController()
+void Update()
 {
     byte lastFrameClutch = inputDetector.DetectInputs().clutch;
     byte thisFrameClutch = lastFrameClutch;
