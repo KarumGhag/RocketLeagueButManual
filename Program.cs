@@ -53,7 +53,9 @@ void UpdateController()
         ghostController.Update(controllerState);
 
         int change = thisFrameClutch - lastFrameClutch;
+        // if change > 0 then its you pressing down, dont care about that
         if (change > 0) change = 0;
+        // after discarding you pressing down make coming off of it positive so its easier to understand
         change = Math.Abs(change);
         hud.change = change;
 
