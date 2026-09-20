@@ -69,8 +69,13 @@ public class GearSwitcher
         currentGearIndex = findIndex(currentGear.gearName);
 
         if (currentGearIndex + 1 >= gears.Length) return gears[(int)GearNameIDS.Boost];
-        if (currentGearIndex - 1 < 0) return gears[(int)GearNameIDS.Neutral];
 
+
+        return currentGear;
+    }
+    public Gear GearDown(float currentSpeed)
+    {
+        if (currentGearIndex - 1 < 0) return gears[(int)GearNameIDS.Neutral];
 
         return currentGear;
     }
