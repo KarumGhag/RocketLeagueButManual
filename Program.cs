@@ -5,7 +5,6 @@ using Controller.InputDetection;
 using Controller.GhostController;
 using SharpDX.XInput;
 using XInputController = SharpDX.XInput.Controller;
-using System.Timers;
 
 // Conversion factor from km/h to MPH
 const double KmhToMphFactor = 0.621371;
