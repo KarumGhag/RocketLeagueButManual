@@ -24,8 +24,26 @@ Main();
 void Main()
 {
     hider.Hide();
+
+    Thread hudThread = new Thread(new ThreadStart(hud.MakeHUD));
+    hudThread.Start();
+
+    Thread controllerThread = new Thread(new ThreadStart(UpdateController));
+    controllerThread.Start();
+
     Task.Run(UpdateSpeed);
-    hud.MakeHUD();
+    controllerThread.Join();
+    hudThread.Join();
+}
+
+void UpdateController()
+{
+    while (true)
+    {
+        ControllerState controllerState = inputDetector.DetectInputs();
+        ghostController.Update(controllerState);
+        hud.UpdateControllerState(controllerState);
+    }
 }
 
 async void UpdateSpeed()
@@ -52,7 +70,7 @@ async void UpdateSpeed()
         hud.UpdateSpeedValue(kmhSpeed);
         await Task.Delay(16);
     }
-    }
+}
 
 // Scans all XInput slots and returns the first connected one.
 // Must be called BEFORE the ViGEm ghost controller is created, otherwise
@@ -75,10 +93,6 @@ UserIndex FindPhysicalControllerSlot()
         "No controller connected, connect one and restart the program!"
     );
 }
-
-Main();
-
-
 
 
 /*
