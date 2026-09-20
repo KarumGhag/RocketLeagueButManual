@@ -3,7 +3,8 @@ using Speed.Server;
 
 namespace GearSystem;
 
-public struct Gear
+// readonly bc once made you shouldnt change
+public readonly struct Gear
 {
     public readonly string gearName;
     public readonly float maxSpeed;
@@ -50,5 +51,15 @@ public class GearSwitcher
         }
 
         return 1; // neutral
+    }
+
+    public Gear GearUp(float currentSpeed)
+    {
+        currentGearIndex = findIndex(currentGear.gearName);
+        if (currentGearIndex + 1 >= gears.Length) return currentGear;
+        if (currentGearIndex - 1 < 0) return currentGear;
+
+
+        return currentGear;
     }
 }
