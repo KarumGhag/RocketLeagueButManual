@@ -20,6 +20,9 @@ InputDetector inputDetector = new InputDetector(physicalSlot);
 
 HUD hud = new HUD(hider, inputDetector, ghostController);
 
+Gear currentGear;
+float currentSpeed = 0;
+
 Main();
 
 void Main()
@@ -41,6 +44,10 @@ void Update()
 {
     byte lastFrameClutch = inputDetector.DetectInputs().clutch;
     byte thisFrameClutch = lastFrameClutch;
+
+    currentGear = GearSwitcher.gears[(int)GearSwitcher.GearNameIDS.First];
+    float maxSpeed = currentGear.maxSpeed;
+
     while (true)
     {
         lastFrameClutch = thisFrameClutch;
@@ -50,18 +57,32 @@ void Update()
 
         thisFrameClutch = controllerState.clutch;
 
-        ghostController.Update(controllerState);
-
         int change = thisFrameClutch - lastFrameClutch;
         // if change > 0 then its you pressing down, dont care about that
         if (change > 0) change = 0;
         // after discarding you pressing down make coming off of it positive so its easier to understand
         change = Math.Abs(change);
+
         hud.change = change;
+
+        if (currentSpeed > currentGear.maxSpeed)
+        {
+            GearSwitcher.Stall(ref currentGear, ref controllerState);
+        }
+
+        hud.gear = currentGear.gearName;
+        hud.maxSpeed = currentGear.maxSpeed;
+
+        ghostController.Update(controllerState);
+
+
+
 
         Thread.Sleep(50);
     }
 }
+
+
 
 async void UpdateSpeed()
 {
@@ -85,6 +106,7 @@ async void UpdateSpeed()
         // Convert km/h to MPH
         double mphSpeed = kmhSpeed * KmhToMphFactor;
         hud.UpdateSpeedValue(kmhSpeed);
+        currentSpeed = (float)kmhSpeed;
         await Task.Delay(16);
     }
 }

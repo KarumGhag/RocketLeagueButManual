@@ -20,8 +20,9 @@ public readonly struct Gear
 
 public static class GearSwitcher
 {
-    static readonly Gear[] gears = new Gear[8];
-    enum GearNameIDS : int
+    public static readonly Gear[] gears = new Gear[8];
+
+    public enum GearNameIDS : int
     {
         Neutral = 0,
         Reverse = 1,
@@ -32,7 +33,8 @@ public static class GearSwitcher
         Fifth   = 6,
         Boost   = 7
     }
-    static Gear currentGear;
+
+
     static GearNameIDS currentGearEnum = GearNameIDS.Neutral;
 
     public static void PopulateGears()
@@ -45,8 +47,6 @@ public static class GearSwitcher
         gears[5] = new Gear("fourth", 45, 30);
         gears[6] = new Gear("fifth", 55, 40);
         gears[7] = new Gear("boost", 90, 50);
-
-        currentGear = gears[1];
     }
 
     static GearSwitcher()
@@ -90,4 +90,11 @@ public static class GearSwitcher
 
         return gears[(int)currentGearEnum];
     }
+
+    public static void Stall(ref Gear currentGear, ref ControllerState controllerState)
+    {
+        currentGear = GearSwitcher.gears[(int)GearSwitcher.GearNameIDS.Neutral];
+        controllerState.accel = 0;
+    }
+
 }
