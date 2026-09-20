@@ -21,13 +21,24 @@ public readonly struct Gear
 public class GearSwitcher
 {
     readonly Gear[] gears = new Gear[8];
+    enum GearNameIDS : int
+    {
+        Neutral = 0,
+        Reverse = 1,
+        First   = 2,
+        Second  = 3,
+        Third   = 4,
+        Fourth  = 5,
+        Fifth   = 6,
+        Boost   = 7
+    }
     int currentGearIndex = 1;
     Gear currentGear;
 
     void PopulateGears()
     {
-        gears[0] = new Gear("reverse", 10, 0);
-        gears[1] = new Gear("neutral", 2, -1); // -1 means any entry speed
+        gears[0] = new Gear("neutral", 2, -1); // -1 means any entry speed
+        gears[1] = new Gear("reverse", 10, 0);
         gears[2] = new Gear("first", 10, 0);
         gears[3] = new Gear("second", 24, 6);
         gears[4] = new Gear("third", 35, 17);
@@ -50,14 +61,15 @@ public class GearSwitcher
             if (gears[i].gearName == name) return i;
         }
 
-        return 1; // neutral
+        return (int)GearNameIDS.Neutral; // neutral
     }
 
     public Gear GearUp(float currentSpeed)
     {
         currentGearIndex = findIndex(currentGear.gearName);
-        if (currentGearIndex + 1 >= gears.Length) return currentGear;
-        if (currentGearIndex - 1 < 0) return currentGear;
+
+        if (currentGearIndex + 1 >= gears.Length) return gears[(int)GearNameIDS.Boost];
+        if (currentGearIndex - 1 < 0) return gears[(int)GearNameIDS.Neutral];
 
 
         return currentGear;
