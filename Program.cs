@@ -45,7 +45,9 @@ void Update()
     byte lastFrameClutch = inputDetector.DetectInputs().clutch;
     byte thisFrameClutch = lastFrameClutch;
 
-    currentGear = GearSwitcher.gears[(int)GearSwitcher.GearNameIDS.First];
+    ControllerState lastFrameState = inputDetector.DetectInputs();
+
+    currentGear = GearSwitcher.gears[(int)GearSwitcher.GearNameIDS.Neutral];
     float maxSpeed = currentGear.maxSpeed;
 
     while (true)
@@ -65,6 +67,13 @@ void Update()
 
         hud.change = change;
 
+
+        if (controllerState.buttons.HasFlag(GamepadButtonFlags.RightShoulder) && !lastFrameState.buttons.HasFlag(GamepadButtonFlags.RightShoulder))
+        {
+            currentGear = GearSwitcher.GearUp(currentSpeed);
+            Console.WriteLine("test");
+        }
+
         if (currentSpeed > currentGear.maxSpeed)
         {
             GearSwitcher.Stall(ref currentGear, ref controllerState);
@@ -77,7 +86,7 @@ void Update()
 
 
 
-
+        lastFrameState = inputDetector.DetectInputs();
         Thread.Sleep(50);
     }
 }

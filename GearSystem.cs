@@ -24,8 +24,8 @@ public static class GearSwitcher
 
     public enum GearNameIDS : int
     {
-        Neutral = 0,
-        Reverse = 1,
+        Reverse = 0,
+        Neutral = 1,
         First   = 2,
         Second  = 3,
         Third   = 4,
@@ -39,10 +39,10 @@ public static class GearSwitcher
 
     public static void PopulateGears()
     {
-        gears[0] = new Gear("neutral", 2, -1); // -1 means any entry speed
-        gears[1] = new Gear("reverse", 10, 0);
-        gears[2] = new Gear("first", 10, 0);
-        gears[3] = new Gear("second", 24, 6);
+        gears[0] = new Gear("reverse", 10, 0);
+        gears[1] = new Gear("neutral", 5, -1); // -1 means any entry speed
+        gears[2] = new Gear("first", 15, -1);
+        gears[3] = new Gear("second", 24, 4);
         gears[4] = new Gear("third", 35, 17);
         gears[5] = new Gear("fourth", 45, 30);
         gears[6] = new Gear("fifth", 55, 40);
@@ -56,6 +56,7 @@ public static class GearSwitcher
 
     public static Gear GearUp(float currentSpeed)
     {
+        Console.WriteLine(currentGearEnum);
         int currentGearIndex = (int)currentGearEnum;
 
         if (currentGearIndex + 1 >= gears.Length) return gears[(int)GearNameIDS.Boost];
@@ -66,6 +67,7 @@ public static class GearSwitcher
         }
         else
         {
+            currentGearEnum = GearNameIDS.Neutral;
             return gears[(int)GearNameIDS.Neutral]; // stall
         }
 
@@ -93,7 +95,9 @@ public static class GearSwitcher
 
     public static void Stall(ref Gear currentGear, ref ControllerState controllerState)
     {
-        currentGear = GearSwitcher.gears[(int)GearSwitcher.GearNameIDS.Neutral];
+        Console.WriteLine("stalled");
+        currentGear = gears[(int)GearNameIDS.Neutral];
+        currentGearEnum = GearNameIDS.Neutral;
         controllerState.accel = 0;
     }
 
