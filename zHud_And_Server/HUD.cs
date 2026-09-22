@@ -9,24 +9,18 @@ namespace RocketLeague.HUD;
 
 public class HUD
 {
-    readonly Hider? hider;
-    readonly InputDetector? inputDetector;
-
     double currentSpeed;
 
-    readonly GhostController ghostController;
     ControllerState controllerState;
 
     public int change;
-    public string gear;
+    public string? gear;
     public float maxSpeed;
 
-    public HUD(Hider hider, InputDetector inputDetector, GhostController ghostController)
-    {
-        this.hider = hider;
-        this.inputDetector = inputDetector;
-        this.ghostController = ghostController;
-    }
+    bool stalled = false;
+    int framesSinceStalled = 0;
+    int stalledTextTime = 30; //how many frames to display that youve stalled
+
 
     public void UpdateSpeedValue(double speed)
     {
@@ -38,6 +32,7 @@ public class HUD
         this.controllerState = controllerState;
     }
 
+
     public void MakeHUD()
     {
         // Pure Raylib window flag configuration
@@ -48,10 +43,11 @@ public class HUD
             ConfigFlags.AlwaysRunWindow
         );
 
-        // Compact 200x50 window setup
-        Raylib.InitWindow(200, 400, "Speed HUD");
+        Raylib.InitWindow(1920, 200, "Speed HUD");
         Raylib.SetTargetFPS(60);
         Raylib.SetWindowPosition(0, 0);
+
+
 
         while (!Raylib.WindowShouldClose())
         {
@@ -70,13 +66,29 @@ public class HUD
             Raylib.DrawText($"Buttons: {controllerState.buttons}", 15, 80, 24, Color.Lime);
             Raylib.DrawText($"Change: {change}", 15, 104, 24, Color.Lime);
             Raylib.DrawText($"Gear: {gear}", 15, 128, 24, Color.Lime);
-            Raylib.DrawText($"MaxSpeed: {maxSpeed}", 15, 152, 24 , Color.Lime);
+            Raylib.DrawText($"MaxSpeed: {maxSpeed}", 15, 152, 24, Color.Lime);
 
-
+            if (stalled)
+            {
+                int textSize = Raylib.MeasureText("Stalled!", 35);
+                Raylib.DrawRectangle(960 - (textSize / 2) - 20, 85, 40 + textSize, 49, new Color(0, 0, 0, 180));
+                Raylib.DrawText("Stalled!", 960 - (textSize / 2), 92, 35, Color.Red);
+                framesSinceStalled++;
+                if (framesSinceStalled > stalledTextTime)
+                {
+                    stalled = false;
+                }
+            }
 
             Raylib.EndDrawing();
         }
 
         Raylib.CloseWindow();
+    }
+
+    public void DisplayStalled()
+    {
+        stalled = true;
+        framesSinceStalled = 0;
     }
 }
