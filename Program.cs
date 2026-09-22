@@ -18,7 +18,7 @@ UserIndex physicalSlot = FindPhysicalControllerSlot();
 GhostController ghostController = new GhostController();
 InputDetector inputDetector = new InputDetector(physicalSlot);
 
-HUD hud = new HUD(hider, inputDetector, ghostController);
+HUD hud = new HUD();
 
 Gear currentGear;
 float currentSpeed = 0;
@@ -39,6 +39,14 @@ void Main()
     controllerThread.Join();
     hudThread.Join();
 }
+
+
+/*
+TO DO:
+make current gear in this class and current gear enum in the gear system 1 thing
+right now there have been issues with there being 2 places where the current gear is defined
+maybe make gear system take in the current gear rather than have a reference to its own
+*/
 
 void Update()
 {
@@ -82,6 +90,7 @@ void Update()
         if (currentSpeed > currentGear.maxSpeed)
         {
             GearSwitcher.Stall(ref currentGear, ref controllerState);
+            hud.DisplayStalled();
         }
 
         hud.gear = currentGear.gearName;
@@ -103,7 +112,7 @@ async void UpdateSpeed()
     SpeedExtractor speedExtractor = new SpeedExtractor();
     if (speedExtractor.Connect() == -1)
     {
-        Console.WriteLine("connection failed!");
+        Console.WriteLine("network connection failed");
         return;
     }
 
