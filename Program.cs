@@ -43,9 +43,7 @@ void Main()
 
 /*
 TO DO:
-make current gear in this class and current gear enum in the gear system 1 thing
-right now there have been issues with there being 2 places where the current gear is defined
-maybe make gear system take in the current gear rather than have a reference to its own
+Add clutch control
 */
 
 void Update()
@@ -78,12 +76,12 @@ void Update()
 
         if (controllerState.buttons.HasFlag(GamepadButtonFlags.RightShoulder) && !lastFrameState.buttons.HasFlag(GamepadButtonFlags.RightShoulder))
         {
-            currentGear = GearSwitcher.GearUp(currentSpeed);
+            GearSwitcher.GearUp(currentSpeed, ref currentGear);
         }
 
         if (controllerState.buttons.HasFlag(GamepadButtonFlags.LeftShoulder) && !lastFrameState.buttons.HasFlag(GamepadButtonFlags.LeftShoulder))
         {
-            currentGear = GearSwitcher.GeadDown(currentSpeed);
+            GearSwitcher.GeadDown(currentSpeed, ref currentGear);
         }
 
 

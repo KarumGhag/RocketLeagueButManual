@@ -40,10 +40,11 @@ public class HUD
             ConfigFlags.UndecoratedWindow |
             ConfigFlags.TransparentWindow |
             ConfigFlags.TopmostWindow |
-            ConfigFlags.AlwaysRunWindow
+            ConfigFlags.AlwaysRunWindow |
+            ConfigFlags.MousePassthroughWindow
         );
 
-        Raylib.InitWindow(1920, 200, "Speed HUD");
+        Raylib.InitWindow(1920, 1700, "Speed HUD");
         Raylib.SetTargetFPS(60);
         Raylib.SetWindowPosition(0, 0);
 
