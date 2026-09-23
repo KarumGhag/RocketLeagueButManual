@@ -44,6 +44,8 @@ void Main()
 /*
 TO DO:
 Add clutch control
+
+Swap to microsoft.gaming.input, will need to change how inputs are detected
 */
 
 void Update()
