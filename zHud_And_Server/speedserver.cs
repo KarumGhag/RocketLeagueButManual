@@ -17,8 +17,9 @@ public class SpeedExtractor
         {
             client = new TcpClient(host, port);
         }
-        catch
+        catch  (Exception ex)
         {
+            Console.WriteLine(ex.Message);
             return -1;
         }
 

@@ -74,7 +74,7 @@ void Update()
         hud.change = change;
 
 
-        if (controllerState.buttons.HasFlag(GamepadButtonFlags.RightShoulder) && !lastFrameState.buttons.HasFlag(GamepadButtonFlags.RightShoulder))
+        if (controllerState.buttons.HasFlag(GamepadButtonFlags.RightShoulder) && !lastFrameState.buttons.HasFlag(GamepadButtonFlags.RightShoulder) && thisFrameClutch == 255)
         {
             GearSwitcher.GearUp(currentSpeed, ref currentGear);
         }
@@ -83,6 +83,12 @@ void Update()
         {
             GearSwitcher.GeadDown(currentSpeed, ref currentGear);
         }
+
+
+        float clutchAsPercent = thisFrameClutch / 255f;
+        float shakeAsPercent = 65535 * clutchAsPercent;
+        inputDetector.Shake((ushort)shakeAsPercent, (ushort)shakeAsPercent);
+
 
 
         if (currentSpeed > currentGear.maxSpeed)

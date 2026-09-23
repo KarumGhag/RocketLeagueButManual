@@ -54,6 +54,16 @@ public class InputDetector
 
         return new ControllerState(clutchValue, accelValue, buttons, leftX, leftY, rightX, rightY);
     }
+
+    public void Shake(ushort left, ushort right)
+    {
+        Vibration vibration = new Vibration
+        {
+            LeftMotorSpeed = left,
+            RightMotorSpeed = right
+        };
+        controller.SetVibration(vibration);
+    }
 }
 
 public struct ControllerState
