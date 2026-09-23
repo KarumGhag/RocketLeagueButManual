@@ -45,7 +45,7 @@ void Main()
 TO DO:
 Add clutch control
 
-Swap to microsoft.gaming.input, will need to change how inputs are detected
+Swap to sdl2, will need to change how inputs are detected and maybe re write FindPhysicalControllerSlot()
 */
 
 void Update()
