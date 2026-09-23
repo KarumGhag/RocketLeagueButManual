@@ -6,6 +6,7 @@ using Controller.GhostController;
 using SharpDX.XInput;
 using XInputController = SharpDX.XInput.Controller;
 using GearSystem;
+using Controller.SDL2Input;
 
 // Conversion factor from km/h to MPH
 const double KmhToMphFactor = 0.621371;
@@ -48,66 +49,79 @@ Add clutch control
 Swap to sdl2, will need to change how inputs are detected and maybe re write FindPhysicalControllerSlot()
 */
 
+// void Update()
+// {
+//     byte lastFrameClutch = inputDetector.DetectInputs().clutch;
+//     byte thisFrameClutch = lastFrameClutch;
+
+//     ControllerState lastFrameState = inputDetector.DetectInputs();
+
+//     currentGear = GearSwitcher.gears[(int)GearSwitcher.GearNameIDS.Neutral];
+//     float maxSpeed = currentGear.maxSpeed;
+
+//     while (true)
+//     {
+//         lastFrameClutch = thisFrameClutch;
+
+//         ControllerState controllerState = inputDetector.DetectInputs();
+//         hud.UpdateControllerState(controllerState);
+
+//         thisFrameClutch = controllerState.clutch;
+
+//         int change = thisFrameClutch - lastFrameClutch;
+//         // if change > 0 then its you pressing down, dont care about that
+//         if (change > 0) change = 0;
+//         // after discarding you pressing down make coming off of it positive so its easier to understand
+//         change = Math.Abs(change);
+
+//         hud.change = change;
+
+
+//         if (controllerState.buttons.HasFlag(GamepadButtonFlags.RightShoulder) && !lastFrameState.buttons.HasFlag(GamepadButtonFlags.RightShoulder) && thisFrameClutch == 255)
+//         {
+//             GearSwitcher.GearUp(currentSpeed, ref currentGear);
+//         }
+
+//         if (controllerState.buttons.HasFlag(GamepadButtonFlags.LeftShoulder) && !lastFrameState.buttons.HasFlag(GamepadButtonFlags.LeftShoulder))
+//         {
+//             GearSwitcher.GeadDown(currentSpeed, ref currentGear);
+//         }
+
+
+//         float clutchAsPercent = thisFrameClutch / 255f;
+//         float shakeAsPercent = 65535 * clutchAsPercent;
+//         inputDetector.Shake((ushort)shakeAsPercent, (ushort)shakeAsPercent);
+
+
+
+//         if (currentSpeed > currentGear.maxSpeed)
+//         {
+//             GearSwitcher.Stall(ref currentGear, ref controllerState);
+//             hud.DisplayStalled();
+//         }
+
+//         hud.gear = currentGear.gearName;
+//         hud.maxSpeed = currentGear.maxSpeed;
+
+//         ghostController.Update(controllerState);
+
+
+
+//         lastFrameState = inputDetector.DetectInputs();
+//         Thread.Sleep(50);
+//     }
+// }
+
 void Update()
 {
-    byte lastFrameClutch = inputDetector.DetectInputs().clutch;
-    byte thisFrameClutch = lastFrameClutch;
-
-    ControllerState lastFrameState = inputDetector.DetectInputs();
-
-    currentGear = GearSwitcher.gears[(int)GearSwitcher.GearNameIDS.Neutral];
-    float maxSpeed = currentGear.maxSpeed;
+    PhysicalController physicalController = new PhysicalController();
+    physicalController.Connect();
+    NewControllerState controllerState;
 
     while (true)
     {
-        lastFrameClutch = thisFrameClutch;
+        controllerState = physicalController.GetInputs();
 
-        ControllerState controllerState = inputDetector.DetectInputs();
-        hud.UpdateControllerState(controllerState);
-
-        thisFrameClutch = controllerState.clutch;
-
-        int change = thisFrameClutch - lastFrameClutch;
-        // if change > 0 then its you pressing down, dont care about that
-        if (change > 0) change = 0;
-        // after discarding you pressing down make coming off of it positive so its easier to understand
-        change = Math.Abs(change);
-
-        hud.change = change;
-
-
-        if (controllerState.buttons.HasFlag(GamepadButtonFlags.RightShoulder) && !lastFrameState.buttons.HasFlag(GamepadButtonFlags.RightShoulder) && thisFrameClutch == 255)
-        {
-            GearSwitcher.GearUp(currentSpeed, ref currentGear);
-        }
-
-        if (controllerState.buttons.HasFlag(GamepadButtonFlags.LeftShoulder) && !lastFrameState.buttons.HasFlag(GamepadButtonFlags.LeftShoulder))
-        {
-            GearSwitcher.GeadDown(currentSpeed, ref currentGear);
-        }
-
-
-        float clutchAsPercent = thisFrameClutch / 255f;
-        float shakeAsPercent = 65535 * clutchAsPercent;
-        inputDetector.Shake((ushort)shakeAsPercent, (ushort)shakeAsPercent);
-
-
-
-        if (currentSpeed > currentGear.maxSpeed)
-        {
-            GearSwitcher.Stall(ref currentGear, ref controllerState);
-            hud.DisplayStalled();
-        }
-
-        hud.gear = currentGear.gearName;
-        hud.maxSpeed = currentGear.maxSpeed;
-
-        ghostController.Update(controllerState);
-
-
-
-        lastFrameState = inputDetector.DetectInputs();
-        Thread.Sleep(50);
     }
 }
 

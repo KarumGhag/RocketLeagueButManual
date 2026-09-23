@@ -5,6 +5,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +13,7 @@
     <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="6.1.0" />
     <PackageReference Include="Nefarius.ViGEm.Client" Version="1.21.256" />
     <PackageReference Include="Raylib-cs" Version="8.1.0" />
+    <PackageReference Include="Sayers.SDL2.Core" Version="1.0.11" />
     <PackageReference Include="SharpDX.XInput" Version="4.2.0" />
   </ItemGroup>
 
