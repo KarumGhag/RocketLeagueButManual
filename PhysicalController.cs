@@ -46,17 +46,66 @@ public class PhysicalController
     {
         SDL_GameControllerUpdate();
         byte leftTrigger = (byte)SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_TRIGGERLEFT);
-        Console.WriteLine(leftTrigger);
-        return new NewControllerState(leftTrigger);
+        byte rightTrigger = (byte)SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
+
+        bool A = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_A));
+        bool B = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_B));
+        bool Y = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_Y));
+        bool X = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_X));
+
+        short leftX = SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_LEFTX);
+        short leftY = InvertShort(SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_LEFTY));
+        short rightX = SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_RIGHTX);
+        short rightY = InvertShort(SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_RIGHTY));
+
+
+        return new NewControllerState(leftTrigger, rightTrigger, A, B, Y, X, leftX, leftY, rightX, rightY);
+    }
+
+
+    // need to invert the y axis because its inverted for some reason
+    // cant just * -1 because short wraps around and is always negative
+    // convert to converted int and then back to short but clamp around min and max
+    short InvertShort(short toInvert)
+    {
+        int inverted = toInvert * -1;
+        return (short)Math.Clamp(inverted, short.MinValue, short.MaxValue);
+    }
+
+
+    static bool ByteToBool(byte Byte)
+    {
+        if (Byte == 1) return true;
+        return false;
     }
 }
 
 public struct NewControllerState
 {
     public byte clutch;
+    public byte accel;
+    public bool A;
+    public bool B;
+    public bool Y;
+    public bool X;
+    public short leftX;
+    public short leftY;
+    public short rightX;
+    public short rightY;
 
-    public NewControllerState(byte leftTrigger)
+    public NewControllerState(byte leftTrigger, byte rightTrigger, bool A, bool B, bool Y, bool X, short leftX, short leftY, short rightX, short rightY)
     {
         clutch = leftTrigger;
+        accel = rightTrigger;
+
+        this.A = A;
+        this.B = B;
+        this.Y = Y;
+        this.X = X;
+
+        this.leftX = leftX;
+        this.leftY = leftY;
+        this.rightX = rightX;
+        this.rightY = rightY;
     }
 }

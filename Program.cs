@@ -121,7 +121,7 @@ void Update()
     while (true)
     {
         controllerState = physicalController.GetInputs();
-
+        ghostController.Update(controllerState);
     }
 }
 
@@ -175,6 +175,9 @@ UserIndex FindPhysicalControllerSlot()
         "No controller connected, connect one and restart the program!"
     );
 }
+
+
+
 
 
 /*
