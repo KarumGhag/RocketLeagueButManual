@@ -8,13 +8,13 @@ public readonly struct Gear
 {
     public readonly string gearName;
     public readonly float maxSpeed;
-    public readonly float entrySpeed;
+    public readonly float minSpeed;
 
     public Gear(string gearName, float maxSpeed, float entrySpeed)
     {
         this.gearName = gearName;
         this.maxSpeed = maxSpeed;
-        this.entrySpeed = entrySpeed;
+        this.minSpeed = entrySpeed;
     }
 }
 
@@ -58,14 +58,15 @@ public static class GearSwitcher
 
         if (currentGearIndex + 1 >= gears.Length) { currentGear = gears[(int)GearNameIDS.Neutral]; return; }
 
-        if (currentSpeed > gears[currentGearIndex + 1].entrySpeed)
+        if (currentSpeed > gears[currentGearIndex + 1].minSpeed)
         {
             currentGear = gears[currentGearIndex + 1];
         }
         else
         {
+            // stall
             currentGear = gears[(int)GearNameIDS.Neutral];
-            return; // stall
+            return;
         }
     }
 
@@ -84,9 +85,16 @@ public static class GearSwitcher
         }
         else
         {
+             // stall
             currentGear = gears[(int)GearNameIDS.Neutral];
-            return; // stall
+            return;
         }
+    }
+
+    // currently doesnt car about coming off the clutch speed
+    public static bool CheckForStall(Gear gear, float currentSpeed, int clutchChange)
+    {
+        return (currentSpeed > gear.maxSpeed) || (currentSpeed < gear.minSpeed);
     }
 
     public static void Stall(ref Gear currentGear, ref ControllerState controllerState)
