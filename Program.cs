@@ -1,10 +1,7 @@
 ﻿using Speed.Server;
 using RocketLeague.HUD;
 using Controller.Hider;
-using Controller.InputDetection;
 using Controller.GhostController;
-using SharpDX.XInput;
-using XInputController = SharpDX.XInput.Controller;
 using GearSystem;
 using Controller.SDL2Input;
 
@@ -13,11 +10,7 @@ const double KmhToMphFactor = 0.621371;
 
 Hider hider = new Hider();
 
-// find the slot of the real controller for the input detector
-UserIndex physicalSlot = FindPhysicalControllerSlot();
-
 GhostController ghostController = new GhostController();
-InputDetector inputDetector = new InputDetector(physicalSlot);
 
 HUD hud = new HUD();
 
@@ -193,32 +186,6 @@ async void UpdateSpeed()
         await Task.Delay(16);
     }
 }
-
-// Scans all XInput slots and returns the first connected one.
-// Must be called BEFORE the ViGEm ghost controller is created, otherwise
-// the ghost's virtual pad can occupy this slot instead of the real one.
-UserIndex FindPhysicalControllerSlot()
-{
-    // when a controller gets connected windows assigns the controller a user index, we dont know what this index it
-    // we make a new xinputcontroller at each index and check if a controller is connected to that slot
-    // if true then it returns that index
-    for (int i = 0; i < 4; i++)
-    {
-        UserIndex index = (UserIndex)i;
-        if (new XInputController(index).IsConnected)
-        {
-            return index;
-        }
-    }
-
-    throw new InvalidOperationException(
-        "No controller connected, connect one and restart the program!"
-    );
-}
-
-
-
-
 
 /*
 Steps to get working:
