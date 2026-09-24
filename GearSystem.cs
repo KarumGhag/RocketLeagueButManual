@@ -1,5 +1,6 @@
 using Controller.InputDetection;
 using Speed.Server;
+using Controller.SDL2Input;
 
 namespace GearSystem;
 
@@ -58,6 +59,8 @@ public static class GearSwitcher
 
         if (currentGearIndex + 1 >= gears.Length) { currentGear = gears[(int)GearNameIDS.Neutral]; return; }
 
+        Console.WriteLine(gears[currentGearIndex + 1].gearName);
+
         if (currentSpeed > gears[currentGearIndex + 1].minSpeed)
         {
             currentGear = gears[currentGearIndex + 1];
@@ -70,7 +73,7 @@ public static class GearSwitcher
         }
     }
 
-    public static void GeadDown(float currentSpeed, ref Gear currentGear)
+    public static void GearDown(float currentSpeed, ref Gear currentGear)
     {
         int currentGearIndex = 0;
         if (Enum.TryParse(currentGear.gearName, out GearNameIDS gearNameID)) currentGearIndex = (int)gearNameID;
@@ -97,7 +100,7 @@ public static class GearSwitcher
         return (currentSpeed > gear.maxSpeed) || (currentSpeed < gear.minSpeed);
     }
 
-    public static void Stall(ref Gear currentGear, ref ControllerState controllerState)
+    public static void Stall(ref Gear currentGear, ref NewControllerState controllerState)
     {
         Console.WriteLine("stalled");
         currentGear = gears[(int)GearNameIDS.Neutral];

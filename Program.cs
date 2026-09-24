@@ -116,29 +116,51 @@ void Update()
 {
     PhysicalController physicalController = new PhysicalController();
     physicalController.Connect();
-    NewControllerState controllerState;
+    NewControllerState controllerState = physicalController.GetInputs();
+    NewControllerState lastControllerState;
 
     byte thisFrameClutch = 0;
     byte lastFrameClutch = 0;
 
-    int change;
+    int clutchChange;
+
+    currentGear = GearSwitcher.gears[(int)GearSwitcher.GearNameIDS.Neutral];
 
     while (true)
     {
         lastFrameClutch = thisFrameClutch;
+        lastControllerState = controllerState;
+
         controllerState = physicalController.GetInputs();
         thisFrameClutch = controllerState.clutch;
 
         // get how much clutch has changed
         // if its positive then its because your going on it
         // dont care about that so set to 0, otherwise make it positive so its easier to work out
-        change = thisFrameClutch - lastFrameClutch;
+        clutchChange = thisFrameClutch - lastFrameClutch;
 
-        hud.change = change;
+        if (controllerState.buttons.RB && !lastControllerState.buttons.RB)
+        {
+            GearSwitcher.GearUp(currentSpeed, ref currentGear);
+        }
+
+        if (controllerState.buttons.LB && !lastControllerState.buttons.LB)
+        {
+            GearSwitcher.GearDown(currentSpeed, ref currentGear);
+        }
+
+        if (GearSwitcher.CheckForStall(currentGear, currentSpeed, clutchChange)) { GearSwitcher.Stall(ref currentGear, ref controllerState); hud.DisplayStalled(); }
+
+        hud.gear = currentGear.gearName;
+        hud.maxSpeed = currentGear.maxSpeed;
+        hud.change = clutchChange;
         hud.UpdateControllerState(controllerState);
         ghostController.Update(controllerState);
 
+
         lastFrameClutch = thisFrameClutch;
+        lastControllerState = controllerState;
+
         Thread.Sleep(50);
     }
 }
