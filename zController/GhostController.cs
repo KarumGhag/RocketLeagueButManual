@@ -34,10 +34,10 @@ public class GhostController
         ghostController.SetAxisValue(Xbox360Axis.RightThumbX, controllerState.rightX);
         ghostController.SetAxisValue(Xbox360Axis.RightThumbY, controllerState.rightY);
 
-        ghostController.SetButtonState(Xbox360Button.A, controllerState.A);
-        ghostController.SetButtonState(Xbox360Button.B, controllerState.B);
-        ghostController.SetButtonState(Xbox360Button.X, controllerState.X);
-        ghostController.SetButtonState(Xbox360Button.Y, controllerState.Y);
+        ghostController.SetButtonState(Xbox360Button.A, controllerState.buttons.A);
+        ghostController.SetButtonState(Xbox360Button.B, controllerState.buttons.B);
+        ghostController.SetButtonState(Xbox360Button.X, controllerState.buttons.X);
+        ghostController.SetButtonState(Xbox360Button.Y, controllerState.buttons.Y);
 
         try
         {

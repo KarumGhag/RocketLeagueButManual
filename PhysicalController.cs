@@ -48,10 +48,14 @@ public class PhysicalController
         byte leftTrigger = ShortToByte(SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_TRIGGERLEFT));
         byte rightTrigger = ShortToByte(SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_TRIGGERRIGHT));
 
-        bool A = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_A));
-        bool B = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_B));
-        bool Y = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_Y));
-        bool X = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_X));
+        bool A  = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_A));
+        bool B  = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_B));
+        bool Y  = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_Y));
+        bool X  = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_X));
+        bool RB = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_RIGHTSHOULDER));
+        bool LB = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_LEFTSHOULDER));
+
+        Buttons buttons = new Buttons(A, B, Y, X, RB, LB);
 
         short leftX = SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_LEFTX);
         short leftY = InvertShort(SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_LEFTY));
@@ -59,7 +63,7 @@ public class PhysicalController
         short rightY = InvertShort(SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_RIGHTY));
 
 
-        return new NewControllerState(leftTrigger, rightTrigger, A, B, Y, X, leftX, leftY, rightX, rightY);
+        return new NewControllerState(leftTrigger, rightTrigger, leftX, leftY, rightX, rightY, buttons);
     }
 
 
@@ -91,28 +95,44 @@ public struct NewControllerState
 {
     public byte clutch;
     public byte accel;
-    public bool A;
-    public bool B;
-    public bool Y;
-    public bool X;
+
+    public Buttons buttons;
+
     public short leftX;
     public short leftY;
     public short rightX;
     public short rightY;
 
-    public NewControllerState(byte leftTrigger, byte rightTrigger, bool A, bool B, bool Y, bool X, short leftX, short leftY, short rightX, short rightY)
+    public NewControllerState(byte leftTrigger, byte rightTrigger, short leftX, short leftY, short rightX, short rightY, Buttons buttons)
     {
         clutch = leftTrigger;
         accel = rightTrigger;
 
-        this.A = A;
-        this.B = B;
-        this.Y = Y;
-        this.X = X;
+        this.buttons = buttons;
 
         this.leftX = leftX;
         this.leftY = leftY;
         this.rightX = rightX;
         this.rightY = rightY;
+    }
+}
+
+public struct Buttons
+{
+    public bool A;
+    public bool B;
+    public bool Y;
+    public bool X;
+    public bool RB;
+    public bool LB;
+
+    public Buttons(bool A, bool B, bool Y, bool X, bool RB, bool LB)
+    {
+        this.A = A;
+        this.B = B;
+        this.Y = Y;
+        this.X = X;
+        this.RB = RB;
+        this.LB = LB;
     }
 }
