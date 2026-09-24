@@ -27,12 +27,12 @@ public static class GearSwitcher
     {
         Reverse = 0,
         Neutral = 1,
-        First   = 2,
-        Second  = 3,
-        Third   = 4,
-        Fourth  = 5,
-        Fifth   = 6,
-        Boost   = 7
+        First = 2,
+        Second = 3,
+        Third = 4,
+        Fourth = 5,
+        Fifth = 6,
+        Boost = 7
     }
 
     public static void PopulateGears()
@@ -88,16 +88,16 @@ public static class GearSwitcher
         }
         else
         {
-             // stall
+            // stall
             currentGear = gears[(int)GearNameIDS.Neutral];
             return;
         }
     }
 
     // currently doesnt car about coming off the clutch speed
-    public static bool CheckForStall(Gear gear, float currentSpeed, int clutchChange)
+    public static bool CheckForStall(Gear gear, float speed, int clutchChange)
     {
-        return (currentSpeed > gear.maxSpeed) || (currentSpeed < gear.minSpeed);
+        return (speed > gear.maxSpeed) || (speed < gear.minSpeed);
     }
 
     public static void Stall(ref Gear currentGear, ref NewControllerState controllerState)
@@ -105,6 +105,12 @@ public static class GearSwitcher
         Console.WriteLine("stalled");
         currentGear = gears[(int)GearNameIDS.Neutral];
         controllerState.accel = 0;
+    }
+
+    public static float PercentThroughGear(Gear currentGear, float speed)
+    {
+        float percentThroughGear = speed / (currentGear.maxSpeed);
+        return percentThroughGear;
     }
 
 }

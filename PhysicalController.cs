@@ -1,5 +1,6 @@
 using static SDL2.SDL;
-using Controller.InputDetection;  // using this for the controller struct, if this works will move the struct here;
+using Controller.InputDetection;
+using SDL2;  // using this for the controller struct, if this works will move the struct here;
 
 namespace Controller.SDL2Input;
 
@@ -16,8 +17,7 @@ public class PhysicalController
             var type = SDL_GameControllerTypeForIndex(i);
 
             // Skip anything that looks like the ViGEm ghost
-            if (type == SDL_GameControllerType.SDL_CONTROLLER_TYPE_XBOX360)
-                continue;
+            if (type == SDL_GameControllerType.SDL_CONTROLLER_TYPE_XBOX360) continue;
 
             return i;
         }
@@ -31,6 +31,7 @@ public class PhysicalController
         SDL_SetHint(SDL_HINT_JOYSTICK_RAWINPUT, "0");
 
         SDL_Init(SDL_INIT_GAMECONTROLLER);
+
         controllerPointer = SDL_GameControllerOpen(FindPhysicalControllerIndex());
         if (controllerPointer == IntPtr.Zero) // has no value
         {
@@ -40,6 +41,8 @@ public class PhysicalController
         {
             Console.WriteLine("Controller connected");
         }
+
+        Console.WriteLine(SDL_GameControllerGetType(controllerPointer));
     }
 
     public NewControllerState GetInputs()
@@ -88,6 +91,17 @@ public class PhysicalController
     {
         if (Byte == 1) return true;
         return false;
+    }
+
+    public void Vibrate(float percent)
+    {
+        SDL_GameControllerUpdate();
+
+        percent /= 100f;
+
+        float max = ushort.MaxValue;
+        ushort amount = (ushort)Math.Floor((percent * max));
+        SDL_GameControllerRumble(controllerPointer, amount, amount, 1);
     }
 }
 

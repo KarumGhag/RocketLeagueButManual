@@ -150,9 +150,13 @@ void Update()
         hud.UpdateControllerState(controllerState);
         ghostController.Update(controllerState);
 
+        float vibratePercent = GearSwitcher.PercentThroughGear(currentGear, currentSpeed);
+        physicalController.Vibrate(vibratePercent);
 
         lastFrameClutch = thisFrameClutch;
         lastControllerState = controllerState;
+
+        Console.WriteLine();
 
         Thread.Sleep(50);
     }
