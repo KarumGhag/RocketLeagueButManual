@@ -45,8 +45,8 @@ public class PhysicalController
     public NewControllerState GetInputs()
     {
         SDL_GameControllerUpdate();
-        byte leftTrigger = (byte)SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_TRIGGERLEFT);
-        byte rightTrigger = (byte)SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
+        byte leftTrigger = ShortToByte(SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_TRIGGERLEFT));
+        byte rightTrigger = ShortToByte(SDL_GameControllerGetAxis(controllerPointer, SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_TRIGGERRIGHT));
 
         bool A = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_A));
         bool B = ByteToBool(SDL_GameControllerGetButton(controllerPointer, SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_B));
@@ -66,12 +66,19 @@ public class PhysicalController
     // need to invert the y axis because its inverted for some reason
     // cant just * -1 because short wraps around and is always negative
     // convert to converted int and then back to short but clamp around min and max
-    short InvertShort(short toInvert)
+    static short InvertShort(short toInvert)
     {
         int inverted = toInvert * -1;
         return (short)Math.Clamp(inverted, short.MinValue, short.MaxValue);
     }
 
+    static byte ShortToByte(short Short)
+    {
+        float percentThroughShort = (float)Short / short.MaxValue;
+        float percentThroughByte = percentThroughShort * 255f;
+
+        return (byte)percentThroughByte;
+    }
 
     static bool ByteToBool(byte Byte)
     {

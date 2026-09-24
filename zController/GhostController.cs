@@ -27,10 +27,7 @@ public class GhostController
 
     public void Update(NewControllerState controllerState)
     {
-        ghostController.SetSliderValue(
-            Xbox360Slider.RightTrigger,
-            controllerState.accel
-        );
+        ghostController.SetSliderValue(Xbox360Slider.RightTrigger, controllerState.accel);
 
         ghostController.SetAxisValue(Xbox360Axis.LeftThumbX, controllerState.leftX);
         ghostController.SetAxisValue(Xbox360Axis.LeftThumbY, controllerState.leftY);
