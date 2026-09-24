@@ -118,10 +118,28 @@ void Update()
     physicalController.Connect();
     NewControllerState controllerState;
 
+    byte thisFrameClutch = 0;
+    byte lastFrameClutch = 0;
+
+    int change;
+
     while (true)
     {
+        lastFrameClutch = thisFrameClutch;
         controllerState = physicalController.GetInputs();
+        thisFrameClutch = controllerState.clutch;
+
+        // get how much clutch has changed
+        // if its positive then its because your going on it
+        // dont care about that so set to 0, otherwise make it positive so its easier to work out
+        change = thisFrameClutch - lastFrameClutch;
+
+        hud.change = change;
+        hud.UpdateControllerState(controllerState);
         ghostController.Update(controllerState);
+
+        lastFrameClutch = thisFrameClutch;
+        Thread.Sleep(50);
     }
 }
 

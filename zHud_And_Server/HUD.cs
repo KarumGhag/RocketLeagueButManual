@@ -4,6 +4,7 @@ using Controller.InputDetection;
 using Controller.GhostController;
 using SharpDX.XInput;
 using XInputController = SharpDX.XInput.Controller;
+using Controller.SDL2Input;
 
 namespace RocketLeague.HUD;
 
@@ -11,7 +12,7 @@ public class HUD
 {
     double currentSpeed;
 
-    ControllerState controllerState;
+    NewControllerState controllerState;
 
     public int change;
     public string? gear;
@@ -27,7 +28,7 @@ public class HUD
         currentSpeed = speed;
     }
 
-    public void UpdateControllerState(ControllerState controllerState)
+    public void UpdateControllerState(NewControllerState controllerState)
     {
         this.controllerState = controllerState;
     }
@@ -64,10 +65,9 @@ public class HUD
 
             Raylib.DrawText($"Clutch: {controllerState.clutch}", 15, 34, 24, Color.Lime);
             Raylib.DrawText($"Accel: {controllerState.accel}", 15, 56, 24, Color.Lime);
-            Raylib.DrawText($"Buttons: {controllerState.buttons}", 15, 80, 24, Color.Lime);
-            Raylib.DrawText($"Change: {change}", 15, 104, 24, Color.Lime);
-            Raylib.DrawText($"Gear: {gear}", 15, 128, 24, Color.Lime);
-            Raylib.DrawText($"MaxSpeed: {maxSpeed}", 15, 152, 24, Color.Lime);
+            Raylib.DrawText($"Change: {change}", 15, 80, 24, Color.Lime);
+            Raylib.DrawText($"Gear: {gear}", 15, 104, 24, Color.Lime);
+            Raylib.DrawText($"MaxSpeed: {maxSpeed}", 15, 128, 24, Color.Lime);
 
             if (stalled)
             {
