@@ -21,13 +21,13 @@ Main();
 
 void Main()
 {
-    hider.Hide();
 
     Thread hudThread = new Thread(new ThreadStart(hud.MakeHUD));
     hudThread.Start();
 
     Thread controllerThread = new Thread(new ThreadStart(Update));
     controllerThread.Start();
+    hider.Hide();
 
     Task.Run(UpdateSpeed);
     controllerThread.Join();
@@ -151,12 +151,11 @@ void Update()
         ghostController.Update(controllerState);
 
         float vibratePercent = GearSwitcher.PercentThroughGear(currentGear, currentSpeed);
-        physicalController.Vibrate(vibratePercent);
+        // physicalController.Vibrate(vibratePercent);
 
         lastFrameClutch = thisFrameClutch;
         lastControllerState = controllerState;
 
-        Console.WriteLine();
 
         Thread.Sleep(50);
     }
@@ -190,10 +189,3 @@ async void UpdateSpeed()
         await Task.Delay(16);
     }
 }
-
-/*
-Steps to get working:
-1. Go to hid hide, enable device hiding, un plug re plug
-2. Open rocket league, go to free play, try to move, you shouldnt be able to move
-3. Run this program and try move
-*/

@@ -7,10 +7,10 @@ using Controller.SDL2Input;
 
 namespace Controller.GhostController;
 
-public class GhostController
+public class GhostController : IDisposable
 {
-    ViGEmClient client;
-    IXbox360Controller ghostController;
+    readonly ViGEmClient client;
+    readonly IXbox360Controller ghostController;
 
     public GhostController()
     {
@@ -47,5 +47,10 @@ public class GhostController
         {
             Console.WriteLine($"Ghost controller error: {ex}");
         }
+    }
+
+    public void Dispose()
+    {
+        ghostController.Disconnect();
     }
 }
