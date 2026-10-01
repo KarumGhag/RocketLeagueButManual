@@ -10,7 +10,6 @@ const double KmhToMphFactor = 0.621371;
 
 Hider hider = new Hider();
 
-GhostController ghostController = new GhostController();
 
 HUD hud = new HUD();
 
@@ -118,6 +117,9 @@ void Update()
     int clutchChange;
 
     currentGear = GearSwitcher.gears[(int)GearSwitcher.GearNameIDS.Neutral];
+
+    GhostController ghostController = new GhostController();
+
 
     while (true)
     {

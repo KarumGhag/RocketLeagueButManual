@@ -30,8 +30,10 @@ public class PhysicalController
         SDL_SetHint(SDL_HINT_XINPUT_ENABLED, "1");
         SDL_SetHint(SDL_HINT_JOYSTICK_RAWINPUT, "0");
 
-
         SDL_Init(SDL_INIT_GAMECONTROLLER);
+
+        Console.WriteLine($"Joystick count: {SDL_NumJoysticks()}");
+        Console.WriteLine($"Joystick name: {SDL_JoystickNameForIndex(0)}");
 
         controllerPointer = SDL_GameControllerOpen(FindPhysicalControllerIndex());
         if (controllerPointer == IntPtr.Zero) // has no value
@@ -73,20 +75,14 @@ public class PhysicalController
             1
         );
 
-        Console.WriteLine($"Rumble result: {rumbleResult}");
-        Console.WriteLine($"SDL error: {SDL_GetError()}");
-        Console.WriteLine($"Attached: {SDL_GameControllerGetAttached(controllerPointer)}");
-        Console.WriteLine($"Has rumble: {SDL_GameControllerHasRumble(controllerPointer)}");
         IntPtr joystick = SDL_GameControllerGetJoystick(controllerPointer);
 
         Console.WriteLine($"Joystick: {joystick}");
-        Console.WriteLine($"Joystick name: {SDL_JoystickName(joystick)}");
-        Console.WriteLine($"Joystick attached: {SDL_JoystickGetAttached(joystick)}");
-        Console.WriteLine($"Joystick instance ID: {SDL_JoystickInstanceID(joystick)}");
+        Console.WriteLine($"Name: {SDL_JoystickName(joystick)}");
+        Console.WriteLine($"Axes: {SDL_JoystickNumAxes(joystick)}");
+        Console.WriteLine($"Buttons: {SDL_JoystickNumButtons(joystick)}");
+        Console.WriteLine($"Hats: {SDL_JoystickNumHats(joystick)}");
 
-        Console.WriteLine($"Has rumble: {SDL_GameControllerHasRumble(controllerPointer)}");
-
-        Console.WriteLine($"Left X: {leftX}");
 
         return new NewControllerState(leftTrigger, rightTrigger, leftX, leftY, rightX, rightY, buttons);
     }
